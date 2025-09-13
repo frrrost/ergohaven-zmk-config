@@ -31,7 +31,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_VSCROLL";
             #sensor-binding-cells = <0>;
-            bindings = <&mkp MS_WHEEL_UP>, <&mkp MS_WHEEL_DOWN>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
         };
 
         // Encoder #3 → Horizontal scroll
@@ -40,7 +40,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_HSCROLL";
             #sensor-binding-cells = <0>;
-            bindings = <&mkp MS_WH_LEFT>, <&mkp MS_WH_RIGHT>;
+            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
         };
     };
 
