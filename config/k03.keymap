@@ -65,10 +65,10 @@
 
             display-name = "Base";
             sensor-bindings =
-                <&enc_vol>,
-                <&enc_no_behavior>,
                 <&enc_alt_tab>,
                 <&enc_hscroll>,
+                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -86,10 +86,10 @@
 
             display-name = "Navigation";
             sensor-bindings =
-                <&enc_vol>,
-                <&enc_no_behavior>,
                 <&enc_vscroll>,
                 <&enc_hscroll>,
+                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -107,10 +107,10 @@
 
             display-name = "Symbols";
             sensor-bindings =
-                <&enc_vol>,
-                <&enc_no_behavior>,
                 <&enc_alt_tab>,
                 <&enc_hscroll>,
+                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -128,9 +128,9 @@
 
             display-name = "Adjust";
             sensor-bindings =
-                <&enc_vol>,
-                <&enc_no_behavior>,
                 <&enc_alt_tab>,
+                <&enc_hscroll>,
+                <&enc_vol>,
                 <&enc_hscroll>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
