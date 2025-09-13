@@ -5,6 +5,8 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define ZMK_MOUSE_SCRL_VAL 140
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20   
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20   
 #include <dt-bindings/zmk/pointing.h>
 
 / {
