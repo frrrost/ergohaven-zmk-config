@@ -82,7 +82,7 @@
                 <&enc_vol>,
                 <&enc_vol>,
                 <&enc_vol>,
-                <&none>,
+                <&enc_vol>,
                 <&enc_vscroll>,
                 <&enc_hscroll>;
 
@@ -103,7 +103,7 @@
                 <&enc_vol>,
                 <&enc_vol>,
                 <&enc_vol>,
-                <&none>,
+                <&enc_vol>,
                 <&enc_alt_tab>,
                 <&enc_hscroll>;
 
@@ -124,7 +124,7 @@
                 <&enc_vol>,
                 <&enc_vol>,
                 <&enc_vol>,
-                <&none>,
+                <&enc_vol>,
                 <&enc_alt_tab>,
                 <&enc_hscroll>;
 
