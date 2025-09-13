@@ -42,6 +42,13 @@
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
         };
+
+        enc_no_behavior: enc_no_behavior {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_NO_BEHAVIOR";
+            #sensor-binding-cells = <0>;
+            bindings = <&none>, <&none>;
+        };
     };
 
     keymap {
@@ -59,11 +66,11 @@
             display-name = "Base";
             sensor-bindings =
                 <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_alt_tab>,
-                <&enc_hscroll>;
+                <&enc_hscroll>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
 
             //  unused
         };
@@ -80,11 +87,11 @@
             display-name = "Navigation";
             sensor-bindings =
                 <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_vscroll>,
-                <&enc_hscroll>;
+                <&enc_hscroll>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
 
             //  unused
         };
@@ -101,11 +108,11 @@
             display-name = "Symbols";
             sensor-bindings =
                 <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_alt_tab>,
-                <&enc_hscroll>;
+                <&enc_hscroll>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
 
             //  unused
         };
@@ -122,11 +129,11 @@
             display-name = "Adjust";
             sensor-bindings =
                 <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
+                <&enc_no_behavior>,
                 <&enc_alt_tab>,
-                <&enc_hscroll>;
+                <&enc_hscroll>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
 
             //  unused
         };
