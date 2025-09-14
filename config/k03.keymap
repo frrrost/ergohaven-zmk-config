@@ -56,6 +56,13 @@
             #sensor-binding-cells = <0>;
             bindings = <&none>, <&none>;
         };
+
+        enc_cycle_tabs: enc_cycle_tabs {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_CYCLE_TABS";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp RC(PAGE_UP)>, <&kp RC(PAGE_DOWN)>;
+        };
     };
 
     keymap {
@@ -75,7 +82,7 @@
                 <&enc_alt_tab>,
                 <&enc_hscroll>,
                 <&enc_vol>,
-                <&enc_no_behavior>,
+                <&enc_cycle_tabs>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -96,7 +103,7 @@
                 <&enc_vscroll>,
                 <&enc_hscroll>,
                 <&enc_vol>,
-                <&enc_no_behavior>,
+                <&enc_cycle_tabs>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -117,7 +124,7 @@
                 <&enc_alt_tab>,
                 <&enc_hscroll>,
                 <&enc_vol>,
-                <&enc_no_behavior>,
+                <&enc_cycle_tabs>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -138,7 +145,7 @@
                 <&enc_alt_tab>,
                 <&enc_hscroll>,
                 <&enc_vol>,
-                <&enc_hscroll>,
+                <&enc_cycle_tabs>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
