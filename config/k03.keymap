@@ -23,11 +23,11 @@
 
         // Encoder #2 → Alt+Tab (default layer)
 
-        enc_alt_tab: enc_alt_tab {
+        enc_rotate_tab: enc_rotate_tab {
             compatible = "zmk,behavior-sensor-rotate";
-            label = "ENC_ALT_TAB";
+            label = "ENC_ROTATE_TAB";
             #sensor-binding-cells = <0>;
-            bindings = <&kp LA(TAB)>, <&kp LS(LA(TAB))>;
+            bindings = <&kp TAB>, <&kp LS(TAB)>;
         };
 
         // Encoder #2 → Vertical scroll (nav layer)
@@ -65,12 +65,28 @@
         };
     };
 
+    macros {
+        go_to_alt_tab: go_to_alt_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to 4 &kt LEFT_ALT>;
+            label = "GO_TO_ALT_TAB";
+        };
+
+        from_alt_tab: from_alt_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kt LEFT_ALT &to 0>;
+            label = "FROM_ALT_TAB";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         base {
             bindings = <
-&kp GRAVE  &kp N1  &kp N2         &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSLH
+&kp GRAVE  &kp N1  &kp N2         &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &go_to_alt_tab
 &kp ESC    &kp Q   &kp W          &kp E     &kp R      &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BACKSPACE
 &kp TAB    &kp A   &kp S          &kp D     &kp F      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X          &kp C     &kp V      &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
@@ -79,7 +95,7 @@
 
             display-name = "Base";
             sensor-bindings =
-                <&enc_alt_tab>,
+                <&enc_rotate_tab>,
                 <&enc_hscroll>,
                 <&enc_vol>,
                 <&enc_cycle_tabs>,
@@ -94,7 +110,7 @@
 &kp F1          &kp F2           &kp F3        &kp F4    &kp F5         &kp F6                            &kp F7           &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
 &msc SCRL_UP    &msc SCRL_DOWN   &kp HOME      &kp UP    &kp END        &kp INS                           &kp PG_UP        &kp N7  &kp N8  &kp N9   &trans   &kp F12
 &msc SCRL_LEFT  &msc SCRL_RIGHT  &kp LEFT      &kp DOWN  &kp RIGHT      &kp RET                           &kp PG_DN        &kp N4  &kp N5  &kp N6   &trans   &trans
-&mkp MB1        &trans           &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &mkp LCLK    &kp K_MENU  &kp PRINTSCREEN  &kp N1  &kp N2  &kp N3   &trans   &trans
+&trans          &mkp LCLK        &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &mkp LCLK    &kp K_MENU  &kp PRINTSCREEN  &kp N1  &kp N2  &kp N3   &trans   &trans
                                  &trans        &trans    &trans         &trans   &trans       &trans      &mo 3            &trans  &kp N0  &trans
             >;
 
@@ -121,7 +137,7 @@
 
             display-name = "Symbols";
             sensor-bindings =
-                <&enc_alt_tab>,
+                <&enc_rotate_tab>,
                 <&enc_hscroll>,
                 <&enc_vol>,
                 <&enc_cycle_tabs>,
@@ -142,7 +158,7 @@
 
             display-name = "Adjust";
             sensor-bindings =
-                <&enc_alt_tab>,
+                <&enc_rotate_tab>,
                 <&enc_hscroll>,
                 <&enc_vol>,
                 <&enc_cycle_tabs>,
@@ -150,6 +166,22 @@
                 <&enc_no_behavior>;
 
             //  unused
+        };
+
+        alt-tab_rotator {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &from_alt_tab
+&trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &from_alt_tab  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans         &trans  &trans  &trans  &trans
+            >;
+
+            sensor-bindings =
+                <&enc_vol>,
+                <&enc_rotate_tab>,
+                <&enc_vol>,
+                <&enc_rotate_tab>;
         };
     };
 };
