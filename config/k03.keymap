@@ -180,7 +180,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &from_alt_tab
 &trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &from_alt_tab  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &none   &trans  &trans  &trans  &trans  &trans    &from_alt_tab  &trans  &trans  &trans  &trans  &trans  &trans
                 &trans  &trans  &trans  &trans  &trans    &trans         &trans  &trans  &trans  &trans
             >;
 
