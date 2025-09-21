@@ -74,13 +74,13 @@
         kbd_ctrl_on_hold: kbd_ctrl_on_hold {
             compatible = "zmk,behavior-hold-tap";
             label = "KBD_CTRL_ON_HOLD";
-            bindings = <&kp>, <&kp>;
 
-            #binding-cells = <2>;
+            #binding-cells = <1>;
             tapping-term-ms = <400>;
             flavor = "tap-preferred";
             require-prior-idle-ms = <125>;
-        };
+            bindings =  <&ctrl_once $0>, <&kp $0> ;
+       };
 
         td_caps_lock: td_caps_lock {
             compatible = "zmk,behavior-tap-dance";
@@ -120,8 +120,8 @@
             bindings = <
 &kp GRAVE      &kp N1                     &kp N2                     &kp N3                     &kp N4                     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &go_to_alt_tab
 &kp ESC        &kp Q                      &kp W                      &kp E                      &kp R                      &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BACKSPACE
-&kp TAB        &kbd_ctrl_on_hold LC(A) A  &kbd_ctrl_on_hold LC(S) S  &kp D                      &kp F                      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&td_caps_lock  &kbd_ctrl_on_hold LC(Z) Z  &kbd_ctrl_on_hold LC(X) X  &kbd_ctrl_on_hold LC(C) C  &kbd_ctrl_on_hold LC(V) V  &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp LG(SPACE)
+&kp TAB        &kbd_ctrl_on_hold A  &kbd_ctrl_on_hold S  &kp D                      &kp F                      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&td_caps_lock  &kbd_ctrl_on_hold Z  &kbd_ctrl_on_hold X  &kbd_ctrl_on_hold C  &kbd_ctrl_on_hold V  &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp LG(SPACE)
                                           &kp LG(SPACE)              &kp LALT                   &kp LCTRL                  &mo 1   &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
