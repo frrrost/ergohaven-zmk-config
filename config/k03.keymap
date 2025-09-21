@@ -104,6 +104,13 @@
             bindings = <&kt LEFT_ALT &to 0>;
             label = "FROM_ALT_TAB";
         };
+
+        ctrl_once: ctrl_once {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(C)>;
+            label = "CTRL_ONCE";
+        };
     };
 
     keymap {
