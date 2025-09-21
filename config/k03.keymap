@@ -107,12 +107,12 @@
         ctrl_once: ctrl_once {
             compatible = "zmk,behavior-macro";
             #binding-cells = <1>;     // we’ll pass the key as a parameter
-            bindings = <
-                 &kt LCTRL
-                 &macro_param_1to1
-                 &kp MACRO_PLACEHOLDER 
-                 &kt LCTRL
-            >;  // expands to Ctrl + whatever key we pass in
+            bindings = 
+                <&macro_press &kp LCTRL>   /* press Ctrl so it's held while next step happens */
+              , <&macro_param_1to1>  /* forward the first param into the next binding */
+              , <&macro_tap &kp MACRO_PLACEHOLDER>  /* tap the parameterized key once while Ctrl is held */
+              , <&macro_release &kp LCTRL>   /* release Ctrl */
+
             label = "CTRL_ONCE";
         };
     };
