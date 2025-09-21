@@ -105,7 +105,7 @@
         };
 
         ctrl_once: ctrl_once {
-            compatible = "zmk,behavior-macro";
+            compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;     // we’ll pass the key as a parameter
             bindings = 
                 <&macro_press &kp LCTRL>   /* press Ctrl so it's held while next step happens */
