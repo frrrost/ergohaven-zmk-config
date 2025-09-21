@@ -107,7 +107,12 @@
         ctrl_once: ctrl_once {
             compatible = "zmk,behavior-macro";
             #binding-cells = <1>;     // we’ll pass the key as a parameter
-            bindings = <&kp LC($0)>;  // expands to Ctrl + whatever key we pass in
+            bindings = <
+                 &kt LCTRL
+                 &macro_param_1to1
+                 &kp MACRO_PLACEHOLDER 
+                 &kt LCTRL
+            >;  // expands to Ctrl + whatever key we pass in
             label = "CTRL_ONCE";
         };
     };
