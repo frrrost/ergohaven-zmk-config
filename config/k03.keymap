@@ -105,10 +105,10 @@
             label = "FROM_ALT_TAB";
         };
 
-        ctrl_once: ctrl_once {
+        ctrl_once: ctrl_once { 
             compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(C)>;
+            #binding-cells = <1>;     // we’ll pass the key as a parameter
+            bindings = <&kp LC($0)>;  // expands to Ctrl + whatever key we pass in
             label = "CTRL_ONCE";
         };
     };
