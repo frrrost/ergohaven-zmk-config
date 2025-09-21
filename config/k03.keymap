@@ -112,7 +112,7 @@
               , <&macro_param_1to1>  /* forward the first param into the next binding */
               , <&macro_tap &kp MACRO_PLACEHOLDER>  /* tap the parameterized key once while Ctrl is held */
               , <&macro_release &kp LCTRL>   /* release Ctrl */
-
+            ;
             label = "CTRL_ONCE";
         };
     };
