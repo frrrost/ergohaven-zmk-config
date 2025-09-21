@@ -78,7 +78,7 @@
             tapping-term-ms = <400>;
             flavor = "tap-preferred";
             require-prior-idle-ms = <125>;
-            bindings = <&ctrl_once $0>, <&kp $0>;
+            bindings = <&ctrl_once>, <&kp>;
         };
 
         td_caps_lock: td_caps_lock {
