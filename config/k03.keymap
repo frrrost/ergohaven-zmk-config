@@ -87,6 +87,16 @@
             #binding-cells = <0>;
             bindings = <&kp LEFT_SHIFT>, <&kp CAPSLOCK>;
         };
+
+        kb_yo: kb_yo {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KB_YO";
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <125>;
+            bindings = <&macro_yo>, <&kp>;
+        };
     };
 
     macros {
@@ -107,13 +117,22 @@
         ctrl_once: ctrl_once {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;     // we’ll pass the key as a parameter
-            bindings = 
-                <&macro_press &kp LCTRL>   /* press Ctrl so it's held while next step happens */
-              , <&macro_param_1to1>  /* forward the first param into the next binding */
-              , <&macro_tap &kp MACRO_PLACEHOLDER>  /* tap the parameterized key once while Ctrl is held */
-              , <&macro_release &kp LCTRL>   /* release Ctrl */
-            ;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL &macro_param_1to1>,
+                <&macro_tap>,
+                <&kp MACRO_PLACEHOLDER>,
+                <&macro_release>,
+                <&kp LCTRL>;
+
             label = "CTRL_ONCE";
+        };
+
+        macro_yo: macro_yo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE>;
+            label = "MACRO_YO";
         };
     };
 
@@ -122,11 +141,11 @@
 
         base {
             bindings = <
-&kp GRAVE      &kp N1                 &kp N2                 &kp N3                 &kp N4                 &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &go_to_alt_tab
-&kp ESC        &kp Q                  &kp W                  &kp E                  &kp R                  &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BACKSPACE
-&kp TAB        &kbd_ctrl_on_hold A A  &kbd_ctrl_on_hold S S  &kp D                  &kp F                  &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&td_caps_lock  &kbd_ctrl_on_hold Z Z  &kbd_ctrl_on_hold X X  &kbd_ctrl_on_hold C C  &kbd_ctrl_on_hold V V  &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp LG(SPACE)
-                                      &kp LG(SPACE)          &kp LALT               &kp LCTRL              &mo 1   &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
+&kp GRAVE      &kp N1                 &kp N2                 &kp N3                 &kp N4                 &kp N5                              &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &go_to_alt_tab
+&kp ESC        &kp Q                  &kp W                  &kp E                  &kp R                  &kb_yo 0 T                          &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BACKSPACE
+&kp TAB        &kbd_ctrl_on_hold A A  &kbd_ctrl_on_hold S S  &kp D                  &kp F                  &kp G                               &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&td_caps_lock  &kbd_ctrl_on_hold Z Z  &kbd_ctrl_on_hold X X  &kbd_ctrl_on_hold C C  &kbd_ctrl_on_hold V V  &kp B       &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp LG(SPACE)
+                                      &kp LG(SPACE)          &kp LALT               &kp LCTRL              &mo 1       &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             display-name = "Base";
@@ -185,11 +204,11 @@
 
         adj {
             bindings = <
-&bootloader  &trans          &trans           &trans  &trans  &trans                    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2      &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR_ALL
-&trans       &msc SCRL_UP    &msc SCRL_DOWN   &trans  &trans  &trans                    &trans        &trans        &trans            &trans        &trans        &studio_unlock
-&trans       &msc SCRL_LEFT  &msc SCRL_RIGHT  &trans  &trans  &trans                    &out OUT_BLE  &kp C_VOL_DN  &kp K_MUTE        &kp C_VOL_UP  &trans        &trans
-&trans       &trans          &trans           &trans  &trans  &trans  &trans    &trans  &out OUT_USB  &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT    &trans        &trans
-                             &trans           &trans  &trans  &trans  &trans    &trans  &trans        &trans        &trans            &trans
+&bootloader  &trans  &none            &none           &none            &trans                    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2      &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR_ALL
+&trans       &none   &none            &mmv MOVE_UP    &none            &none                     &trans        &trans        &trans            &trans        &trans        &studio_unlock
+&trans       &none   &mmv MOVE_RIGHT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &none                     &out OUT_BLE  &kp C_VOL_DN  &kp K_MUTE        &kp C_VOL_UP  &trans        &trans
+&trans       &none   &none            &none           &none            &none   &trans    &trans  &out OUT_USB  &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT    &trans        &trans
+                     &trans           &trans          &trans           &trans  &trans    &trans  &trans        &trans        &trans            &trans
             >;
 
             display-name = "Adjust";
