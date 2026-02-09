@@ -36,8 +36,8 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_VSCROLL";
             #sensor-binding-cells = <0>;
-            tap-ms = <20>;
-            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+            tap-ms = <5>;
+            bindings = <&msc MOVE_Y(-10)>, <&msc MOVE_Y(10)>;
         };
 
         // Encoder #3 → Horizontal scroll
@@ -46,8 +46,8 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_HSCROLL";
             #sensor-binding-cells = <0>;
-            tap-ms = <20>;
-            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+            tap-ms = <5>;
+            bindings = <&msc MOVE_X(-10)>, <&msc MOVE_X(10)>;
         };
 
         enc_no_behavior: enc_no_behavior {
@@ -158,9 +158,9 @@
             display-name = "Base";
             sensor-bindings =
                 <&enc_no_behavior>,
-                <&enc_no_behavior>,
+                <&enc_hscroll>,
                 <&enc_vol>,
-                <&enc_no_behavior>,
+                <&enc_vscroll>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
@@ -179,9 +179,9 @@
             display-name = "Navigation";
             sensor-bindings =
                 <&enc_no_behavior>,
-                <&enc_no_behavior>,
+                <&enc_vscroll>,
                 <&enc_prev_next>,
-                <&enc_cycle_tabs>,
+                <&enc_hscroll>,
                 <&enc_no_behavior>,
                 <&enc_no_behavior>;
 
