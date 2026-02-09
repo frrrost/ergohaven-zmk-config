@@ -1,16 +1,145 @@
 #include "keys_ru.h"
+
+#define ZMK_MOUSE_SCRL_VAL 140
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 20
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/pointing.h>
 
 / {
     behaviors {
+        // Encoder #1 → Volume
+
         enc_vol: enc_vol {
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_VOL";
             #sensor-binding-cells = <0>;
             bindings = <&kp C_VOL_UP>, <&kp C_VOL_DN>;
+        };
+
+        // Encoder #2 → Alt+Tab (default layer)
+
+        enc_rotate_tab: enc_rotate_tab {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_ROTATE_TAB";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp TAB>, <&kp LS(TAB)>;
+        };
+
+        // Encoder #2 → Vertical scroll (nav layer)
+
+        enc_vscroll: enc_vscroll {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_VSCROLL";
+            #sensor-binding-cells = <0>;
+            tap-ms = <5>;
+            bindings = <&msc MOVE_Y(-10)>, <&msc MOVE_Y(10)>;
+        };
+
+        // Encoder #3 → Horizontal scroll
+
+        enc_hscroll: enc_hscroll {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_HSCROLL";
+            #sensor-binding-cells = <0>;
+            tap-ms = <5>;
+            bindings = <&msc MOVE_X(-10)>, <&msc MOVE_X(10)>;
+        };
+
+        enc_no_behavior: enc_no_behavior {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_NO_BEHAVIOR";
+            #sensor-binding-cells = <0>;
+            bindings = <&none>, <&none>;
+        };
+
+        enc_cycle_tabs: enc_cycle_tabs {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_CYCLE_TABS";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp RC(PAGE_DOWN)>, <&kp RC(PAGE_UP)>;
+        };
+
+        enc_prev_next: enc_prev_next {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENC_PREV_NEXT";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp C_NEXT>, <&kp C_PREV>;
+        };
+
+        kbd_ctrl_on_hold: kbd_ctrl_on_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KBD_CTRL_ON_HOLD";
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <125>;
+            bindings = <&ctrl_once>, <&kp>;
+        };
+
+        td_caps_lock: td_caps_lock {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_CAPS_LOCK";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT>, <&kp CAPSLOCK>;
+        };
+
+        kb_yo: kb_yo {
+            compatible = "zmk,behavior-hold-tap";
+            label = "KB_YO";
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <125>;
+            bindings = <&macro_yo>, <&kp>;
+        };
+
+        cycle_audio_out: cycle_audio_out {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "CYCLE_AUDIO_OUT";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp F14>, <&kp F15>;
+        };
+    };
+
+    macros {
+        go_to_alt_tab: go_to_alt_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&to 4 &kt LEFT_ALT>;
+            label = "GO_TO_ALT_TAB";
+        };
+
+        from_alt_tab: from_alt_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kt LEFT_ALT &to 0>;
+            label = "FROM_ALT_TAB";
+        };
+
+        ctrl_once: ctrl_once {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;     // we’ll pass the key as a parameter
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL &macro_param_1to1>,
+                <&macro_tap>,
+                <&kp MACRO_PLACEHOLDER>,
+                <&macro_release>,
+                <&kp LCTRL>;
+
+            label = "CTRL_ONCE";
+        };
+
+        macro_yo: macro_yo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp GRAVE>;
+            label = "MACRO_YO";
         };
     };
 
@@ -19,57 +148,102 @@
 
         base {
             bindings = <
-&kp GRAVE  &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                          &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &kp BSPC
-&kp ESC    &kp Q   &kp W     &kp E     &kp R      &kp T                           &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BSLH
-&kp TAB    &kp A   &kp S     &kp D     &kp F      &kp G                           &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B   &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                   &kp LGUI  &kp LALT  &kp LCTRL  &mo 1   &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
+&kp GRAVE      &kp N1                 &kp N2                 &kp N3                 &kp N4                 &kp N5                              &kp N6  &kp N7     &kp N8     &kp N9    &kp N0    &go_to_alt_tab
+&kp ESC        &kp Q                  &kp W                  &kp E                  &kp R                  &kb_yo 0 T                          &kp Y   &kp U      &kp I      &kp O     &kp P     &kp BACKSPACE
+&kp TAB        &kbd_ctrl_on_hold A A  &kbd_ctrl_on_hold S S  &kp D                  &kp F                  &kp G                               &kp H   &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
+&td_caps_lock  &kbd_ctrl_on_hold Z Z  &kbd_ctrl_on_hold X X  &kbd_ctrl_on_hold C C  &kbd_ctrl_on_hold V V  &kp B       &kp LBKT     &kp RBKT   &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp LG(SPACE)
+                                      &none                  &kp LALT               &kp LCTRL              &mo 1       &kp SPACE    &kp ENTER  &mo 2   &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             display-name = "Base";
             sensor-bindings =
+                <&enc_no_behavior>,
+                <&enc_hscroll>,
                 <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>,
-                <&enc_vol>;
+                <&enc_vscroll>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
+
+            //  unused
         };
 
         nav {
             bindings = <
-&kp F1  &kp F2  &kp F3        &kp F4    &kp F5         &kp F6                     &kp F7           &kp F8  &kp F9  &kp F10  &kp F11  &kp F12
-&trans  &trans  &kp HOME      &kp UP    &kp END        &kp INS                    &kp PG_UP        &kp N7  &kp N8  &kp N9   &trans   &trans
-&trans  &trans  &kp LEFT      &kp DOWN  &kp RIGHT      &kp RET                    &kp PG_DN        &kp N4  &kp N5  &kp N6   &trans   &trans
-&trans  &trans  &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &trans    &trans  &kp PRINTSCREEN  &kp N1  &kp N2  &kp N3   &trans   &trans
-                &trans        &trans    &trans         &trans   &trans    &trans  &mo 3            &trans  &kp N0  &trans
+&kp C_PLAY_PAUSE  &kp F2           &kp F3        &kp F4    &kp F5         &kp F6                                 &kp F7     &kp F8        &kp F9        &kp F10       &kp F11         &kp RC(F4)
+&kp F1            &none            &kp HOME      &kp UP    &kp END        &kp INS                                &kp PG_UP  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &none           &kp F12
+&msc SCRL_LEFT    &msc SCRL_RIGHT  &kp LEFT      &kp DOWN  &kp RIGHT      &kp RET                                &kp PG_DN  &kp NUMBER_4  &kp NUMBER_5  &kp N6        &msc SCRL_UP    &msc SCRL_DOWN
+&trans            &kp F14          &kp LC(LEFT)  &kp CAPS  &kp LC(RIGHT)  &kp DEL  &kp K_APP    &kp PRINTSCREEN  &kp N0     &kp N1        &kp NUMBER_2  &kp NUMBER_3  &msc SCRL_LEFT  &msc SCRL_RIGHT
+                                   &trans        &trans    &trans         &trans   &trans       &trans           &mo 3      &trans        &kp DELETE    &kp ENTER
             >;
 
-            display-name = "Nav";
+            display-name = "Navigation";
+            sensor-bindings =
+                <&enc_no_behavior>,
+                <&enc_vscroll>,
+                <&enc_prev_next>,
+                <&enc_hscroll>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
+
+            //  unused
         };
 
         sym {
             bindings = <
-&trans  &trans    &kp AT    &kp DLLR   &kp HASH  &trans                       &trans     &trans    &kp CARET  &trans    &trans    &trans
-&trans  &trans    &kp LT    &kp EQUAL  &kp GT    &kp GRAVE                    &trans     &kp LBKT  &kp UNDER  &kp RBKT  &trans    &trans
-&trans  &kp BSLH  &kp LPAR  &kp MINUS  &kp RPAR  &kp PLUS                     &kp PRCNT  &kp LBRC  &kp SEMI   &kp RBRC  &kp EXCL  &trans
-&trans  &trans    &kp STAR  &kp COLON  &kp FSLH  &trans     &trans    &trans  &trans     &kp PIPE  &kp TILDE  &kp AMPS  &trans    &trans
-                  &trans    &trans     &trans    &mo 3      &trans    &trans  &trans     &trans    &trans     &trans
+&kp C_MUTE  &none     &kp AT    &kp DLLR   &kp HASH  &kp DQT                          &none          &kp LPAR  &kp CARET  &kp RPAR  &none     &trans
+&trans      &none     &kp LT    &kp EQUAL  &kp GT    &kp GRAVE                        &kp LA(LS(D))  &kp LBKT  &kp UNDER  &kp RBKT  &none     &trans
+&trans      &none     &kp LPAR  &kp MINUS  &kp RPAR  &kp PLUS                         &kp PRCNT      &kp LBRC  &kp SEMI   &kp RBRC  &kp EXCL  &trans
+&trans      &kp BSLH  &kp STAR  &kp COLON  &kp FSLH  &none      &trans    &kp RU_DOT  &kp RU_COMMA   &kp PIPE  &kp TILDE  &kp AMPS  &none     &trans
+                      &trans    &trans     &trans    &mo 3      &trans    &trans      &trans         &trans    &trans     &trans
             >;
 
             display-name = "Symbols";
+            sensor-bindings =
+                <&enc_no_behavior>,
+                <&enc_no_behavior>,
+                <&enc_prev_next>,
+                <&cycle_audio_out>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
+
+            //  unused
         };
 
         adj {
             bindings = <
-&bootloader  &trans  &trans  &trans  &trans  &trans                    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2      &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR_ALL
-&trans       &trans  &trans  &trans  &trans  &trans                    &trans        &trans        &trans            &trans        &trans        &studio_unlock
-&trans       &trans  &trans  &trans  &trans  &trans                    &out OUT_BLE  &kp C_VOL_DN  &kp C_MUTE        &kp C_VOL_UP  &trans        &trans
-&trans       &trans  &trans  &trans  &trans  &trans  &trans    &trans  &out OUT_USB  &kp C_PREV    &kp C_PLAY_PAUSE  &kp C_NEXT    &trans        &trans
-                     &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans        &trans            &trans
+&bootloader  &trans  &none           &none           &none            &trans                       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2      &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR_ALL
+&trans       &none   &none           &mmv MOVE_UP    &none            &none                        &trans        &trans        &trans            &trans        &trans        &studio_unlock
+&trans       &none   &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &none                        &out OUT_BLE  &kp C_VOL_DN  &kp K_MUTE        &kp C_VOL_UP  &kp F14       &kp F15
+&trans       &none   &none           &none           &none            &none   &mkp LCLK    &trans  &out OUT_USB  &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT    &trans        &trans
+                     &trans          &trans          &trans           &trans  &trans       &trans  &trans        &trans        &trans            &trans
             >;
 
             display-name = "Adjust";
+            sensor-bindings =
+                <&enc_no_behavior>,
+                <&enc_no_behavior>,
+                <&enc_vol>,
+                <&enc_cycle_tabs>,
+                <&enc_no_behavior>,
+                <&enc_no_behavior>;
+
+            //  unused
+        };
+
+        alt-tab_rotator {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &from_alt_tab
+&trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                           &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &none   &trans  &trans  &trans  &trans  &trans    &from_alt_tab  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans         &trans  &trans  &trans  &trans
+            >;
+
+            sensor-bindings =
+                <&enc_vol>,
+                <&enc_rotate_tab>,
+                <&enc_vol>,
+                <&enc_rotate_tab>;
         };
     };
 };
