@@ -13,28 +13,28 @@
 / {
     behaviors {
 
-        scroll_up: behavior_mouse_scroll {
+        scroll_up: scroll_up {
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_UP";
             x = <0>;
             y = <10>;   // positive = scroll up
         };
 
-        scroll_down: behavior_mouse_scroll {
+        scroll_down: scroll_down {
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_DOWN";
             x = <0>;
             y = <-10>;  // negative = scroll down
         };
 
-        scroll_left: behavior_mouse_scroll {
+        scroll_left: scroll_left {
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_LEFT";
             x = <-10>;
             y = <0>;
         };
 
-        scroll_right: behavior_mouse_scroll {
+        scroll_right: scroll_right {
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_RIGHT";
             x = <10>;
