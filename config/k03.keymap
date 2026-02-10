@@ -70,7 +70,7 @@
             #sensor-binding-cells = <0>;
             tap-ms = <5>;
             bindings = <&scroll_up>, <&scroll_down>;
-            #bindings = <&msc MOVE_Y(-10)>, <&msc MOVE_Y(10)>;
+            //bindings = <&msc MOVE_Y(-10)>, <&msc MOVE_Y(10)>;
         };
 
         // Encoder #3 → Horizontal scroll
@@ -81,7 +81,7 @@
             #sensor-binding-cells = <0>;
             tap-ms = <5>;
             bindings = <&scroll_left>, <&scroll_right>;
-            #bindings = <&msc MOVE_X(-10)>, <&msc MOVE_X(10)>;
+            //bindings = <&msc MOVE_X(-10)>, <&msc MOVE_X(10)>;
         };
 
         enc_no_behavior: enc_no_behavior {
