@@ -24,13 +24,13 @@
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_DOWN";
             x = <0>;
-            y = (-10);  // negative = scroll down
+            y = < -10 >;  // negative = scroll down
         };
 
         scroll_left: scroll_left {
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_LEFT";
-            x = (-10);
+            x = < -10 >;
             y = <0>;
         };
 
