@@ -25,16 +25,16 @@
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_DOWN";
             #binding-cells = <0>;
-            x = 0;
-            y = -10;  // negative = scroll down
+            x = <0>;
+            y = <0>;  // negative = scroll down
         };
 
         scroll_left: scroll_left {
             compatible = "zmk,behavior-mouse-scroll";
             label = "SCROLL_LEFT";
             #binding-cells = <0>;
-            x = -10;
-            y = 0;
+            x = <0>;
+            y = <0>;
         };
 
         scroll_right: scroll_right {
