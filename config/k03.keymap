@@ -12,9 +12,6 @@
 
 / {
     behaviors {
-
-       
-
         // Encoder #1 → Volume
 
         enc_vol: enc_vol {
@@ -39,8 +36,8 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_VSCROLL";
             #sensor-binding-cells = <0>;
-            tap-ms = <5>;
-            bindings = <&scroll_up>, <&scroll_down>;
+            tap-ms = <150>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
         };
 
         // Encoder #3 → Horizontal scroll
@@ -49,8 +46,8 @@
             compatible = "zmk,behavior-sensor-rotate";
             label = "ENC_HSCROLL";
             #sensor-binding-cells = <0>;
-            tap-ms = <5>;
-            bindings = <&scroll_left>, <&scroll_right>;
+            tap-ms = <150>;
+            bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
         };
 
         enc_no_behavior: enc_no_behavior {
